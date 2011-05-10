@@ -2,6 +2,3 @@ all:
   doctrine:
     class: sfDoctrineDatabase
     param:
-      dsn: mysql:host=localhost;dbname=cuteflow
-      username: root
-      password: 
