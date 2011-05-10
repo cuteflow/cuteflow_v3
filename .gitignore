@@ -1,2 +1,4 @@
-^cache$
-^nbproject$
+src/cache/*
+nbproject
+src/lib/model/doctrine/base/*
+src/config/installed
