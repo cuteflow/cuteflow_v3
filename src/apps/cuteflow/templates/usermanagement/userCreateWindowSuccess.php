@@ -65,19 +65,19 @@ cf.createUserWindow = function(){return {
 					Ext.getCmp('userFirstTab_password').setValue(data.result.password);
 					Ext.getCmp('userFirstTab_passwordagain').setValue(data.result.password);
 					
-					Ext.getCmp('userFirstTab_emailformat_id').setValue(data.result.emailformat);
-					Ext.getCmp('userFirstTab_emailtype_id').setValue(data.result.emailtype);
+					Ext.getCmp('userFirstTab_emailformat_id').setValue(data.result.email_format);
+					Ext.getCmp('userFirstTab_emailtype_id').setValue(data.result.email_type);
 					
 					
 					// second Tab, load Grid here
-					Ext.getCmp('userSecondTab_durationlength').setValue(data.result.durationlength);
-					Ext.getCmp('userSecondTab_durationlength_type_id').setValue(data.result.durationtype);
+					Ext.getCmp('userSecondTab_durationlength').setValue(data.result.duration_length);
+					Ext.getCmp('userSecondTab_durationlength_type_id').setValue(data.result.duration_type);
 	
 					// fourth tab
-					Ext.getCmp('userFourthTab_itemsperpage_id').setValue(data.result.displayeditem);
-					Ext.getCmp('userFourthTab_refreshtime_id').setValue(data.result.refreshtime);
-					Ext.getCmp('userFourthTab_circulationdefaultsortcolumn_id').setValue(data.result.circulationdefaultsortcolumn);
-					Ext.getCmp('userFourthTab_circulationdefaultsortdirection_id').setValue(data.result.circulationdefaultsortdirection);
+					Ext.getCmp('userFourthTab_itemsperpage_id').setValue(data.result.displayed_item);
+					Ext.getCmp('userFourthTab_refreshtime_id').setValue(data.result.refresh_time);
+					Ext.getCmp('userFourthTab_circulationdefaultsortcolumn_id').setValue(data.result.circulation_default_sort_column);
+					Ext.getCmp('userFourthTab_circulationdefaultsortdirection_id').setValue(data.result.circulation_default_sort_direction);
 					
 					Ext.getCmp('userFourthTab_markyellow').setValue(data.result.markyellow);
 					Ext.getCmp('userFourthTab_markorange').setValue(data.result.markorange);

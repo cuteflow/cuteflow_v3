@@ -8,8 +8,6 @@ class SystemSetting {
 
 
     public function __construct() {
-        sfLoader::loadHelpers('I18N');
-        sfLoader::loadHelpers('EndAction');
     }
 
 
@@ -22,7 +20,7 @@ class SystemSetting {
     public static function getShowPositionInMail() {
         $data = SystemConfigurationTable::instance()->getSystemConfiguration()->toArray();
         $result = array();
-        if($data[0]['showpositioninmail'] == 1) {
+        if($data[0]['show_position_in_mail'] == 1) {
             $result['hidden'] = 'false';
             $result['collapsible'] = 'true';
         }
@@ -68,8 +66,8 @@ class SystemSetting {
      */
     public function buildColumns(array $data, sfContext $context) {
         for($a = 0;$a<count($data);$a++) {
-            $data[$a]['column'] = $data[$a]['columntext'];
-            $data[$a]['columntext'] = $context->getI18N()->__($data[$a]['columntext'],null,'systemsetting');
+            $data[$a]['column'] = $data[$a]['column_text'];
+            $data[$a]['column_text'] = $context->getI18N()->__($data[$a]['column_text'],null,'systemsetting');
 
         }
         return $data;
@@ -124,7 +122,7 @@ class SystemSetting {
      */
     public static function getFirstLogin() {
         $result = AuthenticationConfigurationTable::instance()->getFirstLogin()->toArray();
-        return $result[0]['firstlogin'];
+        return $result[0]['first_login'];
     }
 
     /**
@@ -145,10 +143,10 @@ class SystemSetting {
             $result[$a]['id'] = $item['id'];
             $result[$a]['isRole'] = false;
             $result[$a]['roleId'] = -1;
-            $result[$a]['deleteworkflow'] = $item['deleteworkflow'];
-            $result[$a]['archiveworkflow'] = $item['archiveworkflow'];
-            $result[$a]['stopneworkflow'] = $item['stopneworkflow'];
-            $result[$a++]['detailsworkflow'] = $item['detailsworkflow'];
+            $result[$a]['delete_workflow'] = $item['delete_workflow'];
+            $result[$a]['archive_workflow'] = $item['archive_workflow'];
+            $result[$a]['stop_new_workflow'] = $item['stop_new_workflow'];
+            $result[$a++]['details_workflow'] = $item['details_workflow'];
         }
         return $result;
     }
@@ -163,11 +161,11 @@ class SystemSetting {
      */
     public function buildUserAgent(array $data, sfContext $context) {
         
-        $result['individualcronjob'] = $data[0]['individualcronjob'];
-        $result['setuseragenttype'] = $data[0]['setuseragenttype'];
-        $result['cronjobdays'] = $this->getDays($this->getRunningDays($data[0]['cronjobdays'],7));
-        $result['cronjobfrom'] = $data[0]['cronjobfrom'];
-        $result['cronjobto'] = $data[0]['cronjobto'];
+        $result['individual_cronjob'] = $data[0]['individual_cronjob'];
+        $result['set_user_agent_type'] = $data[0]['set_user_agent_type'];
+        $result['cronjob_days'] = $this->getDays($this->getRunningDays($data[0]['cron_jobdays'],7));
+        $result['cronjob_from'] = $data[0]['cronjob_from'];
+        $result['cronjob_to'] = $data[0]['cronjob_to'];
         $result['datestore'] = $this->getDate($context);
         return $result;
     }
