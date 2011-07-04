@@ -14,12 +14,12 @@ cf.todoPanelGrid = function(){return {
 		this.initCM();
 		this.initTopToolBar();
 		this.initGrid();
-		setTimeout('cf.todoPanelGrid.storeReload()',<?php $arr = $sf_user->getAttribute('userSettings'); echo $arr['refreshtime']*1000?>);
+		setTimeout('cf.todoPanelGrid.storeReload()',<?php $arr = $sf_user->getAttribute('userSettings'); echo $arr['refresh_time']*1000?>);
 	},
 	
 	initBottomToolbar: function () {
 		this.theBottomToolBar =  new Ext.PagingToolbar({
-			pageSize: <?php $arr = $sf_user->getAttribute('userSettings'); echo $arr['displayeditem'];?>,
+			pageSize: <?php $arr = $sf_user->getAttribute('userSettings'); echo $arr['displayed_item'];?>,
 			store: this.theTodoStore,
 			displayInfo: true,
 			style: 'margin-bottom:10px;',
@@ -30,7 +30,7 @@ cf.todoPanelGrid = function(){return {
 	},
 	
 	storeReload: function () {
-		setTimeout('cf.todoPanelGrid.storeReload()',<?php $arr = $sf_user->getAttribute('userSettings'); echo $arr['refreshtime']*1000?>);
+		setTimeout('cf.todoPanelGrid.storeReload()',<?php $arr = $sf_user->getAttribute('userSettings'); echo $arr['refresh_time']*1000?>);
 		try {
 			cf.todoPanelGrid.theTodoStore.reload();
 		}
@@ -52,8 +52,6 @@ cf.todoPanelGrid = function(){return {
 			{header: "<?php echo $arr[4]['text'];?>", width: <?php echo $arr[4]['width']; ?>, sortable: true, dataIndex: '<?php echo $arr[4]['store']; ?>', css : "text-align : left;font-size:12px;align:center;", hidden: <?php echo $arr[4]['hidden']; ?>},
 			{header: "<?php echo $arr[5]['text'];?>", width: <?php echo $arr[5]['width']; ?>, sortable: true, dataIndex: '<?php echo $arr[5]['store']; ?>', css : "text-align : left;font-size:12px;align:center;", hidden: <?php echo $arr[5]['hidden']; ?>},
 			{header: "<?php echo $arr[6]['text'];?>", width: <?php echo $arr[6]['width']; ?>, sortable: true, dataIndex: '<?php echo $arr[6]['store']; ?>', css : "text-align : left;font-size:12px;align:center;", hidden: <?php echo $arr[6]['hidden']; ?>},
-			{header: "<?php echo $arr[7]['text'];?>", width: <?php echo $arr[7]['width']; ?>, sortable: true, dataIndex: '<?php echo $arr[7]['store']; ?>', css : "text-align : left;font-size:12px;align:center;", hidden: <?php echo $arr[7]['hidden']; ?>},
-			{header: "<?php echo $arr[8]['text'];?>", width: <?php echo $arr[8]['width']; ?>, sortable: true, dataIndex: '<?php echo $arr[8]['store']; ?>', css : "text-align : left;font-size:12px;align:center;", hidden: <?php echo $arr[8]['hidden']; ?>},
 			{header: "<div ext:qtip=\"<table><tr><td><img src='/images/icons/delete.png' />&nbsp;&nbsp;</td><td><?php echo __('Delete Workflow',null,'workflowmanagement'); ?></td></tr><tr><td><img src='/images/icons/zoom.png' />&nbsp;&nbsp;</td><td><?php echo __('Show Details',null,'workflowmanagement'); ?></td></tr><tr><td><img src='/images/icons/pencil.png' />&nbsp;&nbsp;</td><td><?php echo __('Edit Workflow',null,'workflowmanagement'); ?></td></tr></table>\" ext:qwidth=\"230\"><?php echo __('Action',null,'documenttemplate'); ?></div>", width: 80, sortable: false, dataIndex: 'action', css : "text-align : left;font-size:12px;align:center;", renderer: this.renderButton}
 		]);
 	},
@@ -68,7 +66,7 @@ cf.todoPanelGrid = function(){return {
 				fields: [
 					{name: '#'},
 					{name: 'id'},
-					{name: 'mailinglisttemplate_id'},
+					{name: 'mailinglist_template_id'},
 					{name: 'mailinglisttemplate'},
 					{name: 'sender_id'},
 					{name: 'sendername'},
@@ -79,8 +77,8 @@ cf.todoPanelGrid = function(){return {
 					{name: 'isstopped'},
 					{name: 'auth'},
 					{name: 'currentlyrunning'},
-					{name: 'versioncreated_at'},
-					{name: 'activeversion_id'},
+					{name: 'version_created_at'},
+					{name: 'active_version_id'},
 					{name: 'userdefined1'},
 					{name: 'userdefined2'}
 				]
@@ -109,7 +107,7 @@ cf.todoPanelGrid = function(){return {
             },{
 				xtype: 'combo', // number of records to display in grid
 				mode: 'local',
-				value: '<?php $arr = $sf_user->getAttribute('userSettings'); echo $arr['displayeditem'];?>',
+				value: '<?php $arr = $sf_user->getAttribute('userSettings'); echo $arr['displayed_item'];?>',
 				editable:false,
 				triggerAction: 'all',
 				foreSelection: true,
@@ -159,19 +157,19 @@ cf.todoPanelGrid = function(){return {
 	
 	renderButton: function (data, cell, record, rowIndex, columnIndex, store, grid) {
 		var id = record.data['id'];
-		var activeversion_id = record.data['activeversion_id'];
+		var active_version_id = record.data['active_version_id'];
 		var isstopped = record.data['isstopped'];
 		
 		var rights = record.data['auth'];
 		
-		var btnDetails = cf.todoPanelGrid.createDetailsButton.defer(10,this, [id, activeversion_id, rights.detailsworkflow]);
-		var btnEdit = cf.todoPanelGrid.createDeleteButton.defer(10,this, [id, activeversion_id, rights.deleteworkflow]);
-		var btnEdit = cf.todoPanelGrid.createEditButton.defer(10,this, [id, activeversion_id]);
+		var btnDetails = cf.todoPanelGrid.createDetailsButton.defer(10,this, [id, active_version_id, rights.details_workflow]);
+		var btnEdit = cf.todoPanelGrid.createDeleteButton.defer(10,this, [id, active_version_id, rights.delete_workflow]);
+		var btnEdit = cf.todoPanelGrid.createEditButton.defer(10,this, [id, active_version_id]);
 		return '<center><table><tr><td width="16"><div id="todooverview_delete'+ id +'"></div></td><td width="16"><div id="todooverview_details'+ id +'"></div></td><td width="16"><div id="todooverview_edit'+ id +'"></div></td></tr></table></center>';
 	},
 	
 	
-	createEditButton: function (template_id, activeversion_id) {
+	createEditButton: function (template_id, active_version_id) {
 		var btn_copy = new Ext.form.Label({
 			html: '<span style="cursor:pointer;"><img src="/images/icons/pencil.png" /></span>',
 			renderTo: 'todooverview_edit' + template_id,
@@ -179,7 +177,7 @@ cf.todoPanelGrid = function(){return {
 				render: function(c){
 					c.getEl().on({
 						click: function(el){
-							cf.workflowedit.init(template_id, activeversion_id);
+							cf.workflowedit.init(template_id, active_version_id);
 						},
 					scope: c
 					});
@@ -189,7 +187,7 @@ cf.todoPanelGrid = function(){return {
 	},
 	
 	
-	createDetailsButton: function (template_id, activeversion_id, right) {
+	createDetailsButton: function (template_id, active_version_id, right) {
 		var btn_copy = new Ext.form.Label({
 			renderTo: 'todooverview_details' + template_id,
 			html: '<span style="cursor:pointer;"><img src="/images/icons/zoom.png" /></span>',
@@ -198,7 +196,7 @@ cf.todoPanelGrid = function(){return {
 					c.getEl().on({
 						click: function(el){
 							if(right == 1) {
-								cf.workflowdetails.init(template_id, activeversion_id, false, false);
+								cf.workflowdetails.init(template_id, active_version_id, false, false);
 							}
 							else {
 								Ext.Msg.minWidth = 200;
@@ -213,7 +211,7 @@ cf.todoPanelGrid = function(){return {
 		
 	},
 	
-	createDeleteButton: function (template_id, activeversion_id, right) {
+	createDeleteButton: function (template_id, active_version_id, right) {
 		var btn_copy = new Ext.form.Label({
 			renderTo: 'todooverview_delete' + template_id,
 			html: '<span style="cursor:pointer;"><img src="/images/icons/delete.png" /></span>',
@@ -228,7 +226,7 @@ cf.todoPanelGrid = function(){return {
 								   buttons: Ext.Msg.YESNO,
 								   fn: function(btn, text) {
 										if(btn == 'yes') {
-											cf.workflowmanagementPanelCRUD.deleteWorkflow(template_id, activeversion_id);
+											cf.workflowmanagementPanelCRUD.deleteWorkflow(template_id, active_version_id);
 										}
 								   }
 								});

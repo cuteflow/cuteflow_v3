@@ -22,8 +22,8 @@ class Usermanagement {
      */
     public function buildUserColumns(array $data, sfContext $context) {
         for($a = 0;$a<count($data);$a++) {
-            $data[$a]['column'] = $data[$a]['columntext'];
-            $data[$a]['columntext'] = $context->getI18N()->__($data[$a]['columntext'],null,'systemsetting');
+            $data[$a]['column'] = $data[$a]['column_text'];
+            $data[$a]['column_text'] = $context->getI18N()->__($data[$a]['column_text'],null,'systemsetting');
 
         }
         return $data;
@@ -58,7 +58,7 @@ class Usermanagement {
 
     public static function checkLDAP () {
         $result = AuthenticationConfigurationTable::instance()->getAuthenticationType();
-        if($result[0]->getAuthenticationtype() == 'DATABASE_LDAP') {
+        if($result[0]->getAuthenticationType() == 'DATABASE_LDAP') {
             return 'false';
         }
         else {
@@ -119,7 +119,7 @@ class Usermanagement {
             $user = $item->getUserData();
             $result[$a]['databaseId'] = $item->getId();
             $result[$a]['unique_id'] = $a;
-            $result[$a]['user_id'] = $item->getUseragentId();
+            $result[$a]['user_id'] = $item->getUserAgentId();
             $result[$a++]['text'] = $user[0]->getFirstname() . ' ' . $user[0]->getLastname();
         }
         return $result;
@@ -165,17 +165,17 @@ class Usermanagement {
 
 
             $result['language'] = $usersettings->getLanguage();
-            $result['durationlength'] = $usersettings->getDurationlength();
-            $result['durationtype'] = $usersettings->getDurationtype();
-            $result['markyellow'] = $usersettings->getMarkyellow();
-            $result['markred'] = $usersettings->getMarkred();
-            $result['markorange'] = $usersettings->getMarkorange();
-            $result['refreshtime'] = $usersettings->getRefreshtime();
-            $result['displayeditem'] = $usersettings->getDisplayeditem();
-            $result['emailformat'] = $usersettings->getEmailformat();
-            $result['emailtype'] = $usersettings->getEmailtype();
-            $result['circulationdefaultsortcolumn'] = $usersettings->getCirculationdefaultsortcolumn();
-            $result['circulationdefaultsortdirection'] = $usersettings->getCirculationdefaultsortdirection();
+            $result['duration_length'] = $usersettings->getDurationLength();
+            $result['duration_type'] = $usersettings->getDurationType();
+            $result['mark_yellow'] = $usersettings->getMarkYellow();
+            $result['mark_red'] = $usersettings->getMarkRed();
+            $result['mark_orange'] = $usersettings->getMarkOrange();
+            $result['refresh_time'] = $usersettings->getRefreshTime();
+            $result['displayed_item'] = $usersettings->getDisplayedItem();
+            $result['email_format'] = $usersettings->getEmailFormat();
+            $result['email_type'] = $usersettings->getEmailType();
+            $result['circulation_default_sort_column'] = $usersettings->getCirculationDefaultSortColumn();
+            $result['circulation_default_sort_direction'] = $usersettings->getCirculationDefaultSortDirection();
         }
         return $result;
     }
