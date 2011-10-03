@@ -68,7 +68,7 @@ class FieldClass {
         foreach($data as $item) {
             $textfield = $item->getFieldTextfield();
             $result['regex'] = $textfield[0]->getRegex();
-            $result['defaultvalue'] = $textfield[0]->getDefaultvalue();
+            $result['default_value'] = $textfield[0]->getDefaultValue();
         }
         return $result;
     }
@@ -95,7 +95,7 @@ class FieldClass {
         $result = $this->getFieldData($data);
         foreach($data as $item) {
             $number = $item->getFieldNumber();
-            $result['defaultvalue'] = $number[0]->getDefaultvalue();
+            $result['default_value'] = $number[0]->getDefaultValue();
             $result['regex'] = $number[0]->getRegex();
             $result['combobox_value'] = $number[0]->getComboboxValue();
         }
